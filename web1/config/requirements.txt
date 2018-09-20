@@ -1,0 +1,4 @@
+django
+Pillow
+uwsgi
+django-ckeditor

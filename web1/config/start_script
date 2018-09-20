@@ -1,0 +1,24 @@
+#!/bin/bash
+
+nginx settings
+sed -i '/user/{s/nginx/root/}' /etc/nginx/nginx.conf
+ln -s /root/config/admincloud_nginx.conf /etc/nginx/conf.d/
+nginx
+
+#env >> /etc/default/locale
+#if [ 0"$KAFKA_CRON_HOUR" != "0" ]; then
+#   echo "$KAFKA_CRON_MINUTE $KAFKA_CRON_HOUR * * * PATH=/usr/local/jdk1.8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin;/root/cron/kafka_cron.sh" > /root/crontabfile
+#
+#   crontab /root/crontabfile
+#   cp /root/crontabfile /etc/crontab
+#   /etc/init.d/cron start
+#fi
+
+
+#application settings
+export DJANGO_SETTINGS_MODULE=admincloud.settings
+cd ../project/admincloud
+
+cd ..
+uwsgi --ini admincloud_uwsgi.ini
+
